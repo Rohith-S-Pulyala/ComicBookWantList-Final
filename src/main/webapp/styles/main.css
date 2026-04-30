@@ -1,0 +1,86 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Apr 4, 2026, 12:51:25 PM
+    Author     : rohit
+*/
+
+
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+th, td { 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
+}
+th { 
+    background-color: #f2f2f2; 
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .form-group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        flex: 1 0 10px;
+        max-width: 150px;
+        margin-bottom: 5px;
+    }
+    
+    .form-group input, .form-group select {
+        flex: 1 0 20px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    .form-group select {
+        height: 38px;
+    }
+    
+    table, thead, tbody, th, td, tr {
+        display: block; /* Turns into a block element */
+    }
+    
+    thead tr {  /* Hide the headers */
+        display: none;
+    }
+    
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+    }
+    
+    td {
+        text-align: right; 
+        padding-left: 50%; 
+        position: relative;
+    }
+    
+    /* Label the data using a data-attribute */
+    td::before { 
+        content: attr(data-label); /* Pulls text from HTML attribute */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+    }
+}
