@@ -5,6 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ComicBooks4Me - Register</title>
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
     </head>
     <body>
         <div class="login-container">

@@ -78,6 +78,6 @@
             </tbody>
         </table>
         <br>
-        <a href="index.jsp">Add Another Comic</a>
+        <a href="index.jsp">Add Comic</a>
     </body>
 </html>

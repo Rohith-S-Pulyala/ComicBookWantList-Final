@@ -14,35 +14,56 @@
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="comicId" value="${comic.id}">
             
-            <label>Title:</label> 
-            <input type="text" name="title" value="${comic.title}">
+            <h3>Edit Comic</h3>
             
-            <label>Issue:</label> 
-            <input type="text" name="issueNumber" value="${comic.issueNumber}">
+            <div class="form-group">
+                <label>Title:</label> 
+                <input type="text" name="title" value="${comic.title}">
+            </div>
+            
+            <div class="form-group">
+                <label>Issue:</label> 
+                <input type="text" name="issueNumber" value="${comic.issueNumber}">
+            </div>
 
-            <label>Publisher:</label> 
-            <input type="text" name="publisher" value="${comic.publisher}">
+            <div class="form-group">
+                <label>Publisher:</label> 
+                <input type="text" name="publisher" value="${comic.publisher}">
+            </div>    
             
-            <label>Author:</label> 
-            <input type="text" name="author" value="${comic.author}">
+            <div class="form-group">
+                <label>Author:</label> 
+                <input type="text" name="author" value="${comic.author}">
+            </div>
             
-            <label>Illustrator:</label> 
-            <input type="text" name="illustrator" value="${comic.illustrator}">
+            <div class="form-group">
+                <label>Illustrator:</label> 
+                <input type="text" name="illustrator" value="${comic.illustrator}">
+            </div>
             
-            <label>Variant Cover:</label> 
-            <select name="isVariant">
-                <option value="false">No</option>
-                <option value="true">Yes</option>
-            </select>
+            <div class="form-group">
+                <label>Variant Cover:</label> 
+                <select name="isVariant">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
             
-            <label>Store:</label>
-            <input type="text" name="storeName" value="${comic.storeName}">
             
-            <label>Owner:</label>
-            <input type="text" name="ownerName" value="${comic.ownerName}">
+            <div class="form-group">
+                <label>Store:</label>
+                <input type="text" name="storeName" value="${comic.storeName}">
+            </div>
+            
+            <div class="form-group">
+                <label>Owner:</label>
+                <input type="text" name="ownerName" value="${comic.ownerName}">
+            </div>            
 
-            <label>Notes:</label>
-            <textarea name="storeInfo">${comic.storeInfo}</textarea>
+            <div class="form-group">
+                <label>Notes:</label>
+                <textarea name="storeInfo">${comic.storeInfo}</textarea>
+            </div>            
             
             <button type="submit">Save Changes</button>
             <a href="ComicServlet">Cancel</a>
