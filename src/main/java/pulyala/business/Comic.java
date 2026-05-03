@@ -48,16 +48,16 @@ public class Comic implements java.io.Serializable {
         this.illustrator = illustrator;
         this.isVariant = isVariant;
         this.storeName = (storeName == null) ? "N/A" : storeName;
-        this.ownerName = (ownerName == null) ? "Author Unknown" : ownerName;
+        this.ownerName = (ownerName == null) ? "Owner Unknown" : ownerName;
         this.storeInfo = (storeInfo == null) ? "None provided" : storeInfo;
     }
     
     public int getId() { return id; }
     public String getTitle() { return title; }
     public int getIssueNumber() { return issueNumber; }
-    public String getPublisher() { return title; }
-    public String getAuthor() { return title; }
-    public String getIllustrator() { return title; }
+    public String getPublisher() { return publisher; }
+    public String getAuthor() { return author; }
+    public String getIllustrator() { return illustrator; }
     public boolean getIsVariant() { return isVariant; }
     public String getStoreName() {return storeName; }
     public String getOwnerName() {return ownerName; }
