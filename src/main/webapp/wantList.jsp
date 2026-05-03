@@ -22,8 +22,8 @@
         <header>
             <div class="user-info">
                 <p>Welcome, <strong>${sessionScope.user}</strong>!</p>
-                <a href="LogoutServlet" class="btn-logout">Sign Out</a>
             </div>
+            <a href="LogoutServlet" class="btn-logout">Sign Out</a>
         </header>
         
         <h1>Your Current Want List</h1>
