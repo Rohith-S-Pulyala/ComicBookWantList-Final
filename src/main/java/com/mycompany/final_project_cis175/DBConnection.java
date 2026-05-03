@@ -4,13 +4,15 @@
  */
 package com.mycompany.final_project_cis175;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.util.Properties;
 import javax.sql.DataSource;
-
+import com.mysql.cj.jdbc.Driver;
 /**
  * Utility class to manage database connections using Tomcat's JNDI Resource Pool.
  * Ensures efficient connection sharing and keeps credentials out of the source code
@@ -18,8 +20,7 @@ import javax.sql.DataSource;
  */
 public class DBConnection {
     private static DataSource dataSource;
-    
-    //
+
     static {
         try {
             Context initContext = new InitialContext();

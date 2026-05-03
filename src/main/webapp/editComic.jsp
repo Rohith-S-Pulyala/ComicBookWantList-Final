@@ -1,3 +1,5 @@
+<!--Editing Comic fields-->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,8 +20,26 @@
             <label>Issue:</label> 
             <input type="text" name="issueNumber" value="${comic.issueNumber}">
 
+            <label>Publisher:</label> 
+            <input type="text" name="publisher" value="${comic.publisher}">
+            
+            <label>Author:</label> 
+            <input type="text" name="author" value="${comic.author}">
+            
+            <label>Illustrator:</label> 
+            <input type="text" name="illustrator" value="${comic.illustrator}">
+            
+            <label>Variant Cover:</label> 
+            <select name="isVariant">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+            
             <label>Store:</label>
             <input type="text" name="storeName" value="${comic.storeName}">
+            
+            <label>Owner:</label>
+            <input type="text" name="ownerName" value="${comic.ownerName}">
 
             <label>Notes:</label>
             <textarea name="storeInfo">${comic.storeInfo}</textarea>

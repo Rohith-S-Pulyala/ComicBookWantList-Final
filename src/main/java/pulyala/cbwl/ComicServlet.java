@@ -60,10 +60,17 @@ public class ComicServlet extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("comicId"));
                 String title = request.getParameter("title");
                 int issue = Integer.parseInt(request.getParameter("issueNumber"));
+                
+                String publisher = request.getParameter("publisher");
+                String author = request.getParameter("author");
+                String illustrator = request.getParameter("illustrator");
+                boolean isVariant = Boolean.parseBoolean(request.getParameter("isVariant"));
+                
                 String store = request.getParameter("storeName");
+                String owner = request.getParameter("ownerName");
                 String info = request.getParameter("storeInfo");
 
-                boolean updated = dao.updateComic(id, userId, title, issue, store, info);
+                boolean updated = dao.updateComic(id, userId, title, issue, publisher, author, illustrator, isVariant, store, owner, info); // UPDATE
                 session.setAttribute("feedback", updated ? "Successfully updated " + title : "Database Error");
             } catch (NumberFormatException excpt) {
                 session.setAttribute("feedback", "Update Error: ID or Issue Number is invalid.");
@@ -81,7 +88,7 @@ public class ComicServlet extends HttpServlet {
                     boolean success = dao.addComicWithStore(userId, title, issueNumber,
                         request.getParameter("publisher"), request.getParameter("author"),
                         request.getParameter("illustrator"),
-                        Boolean.parseBoolean(request.getParameter("variantCover")),
+                        Boolean.parseBoolean(request.getParameter("isVariant")),
                         request.getParameter("storeName"), request.getParameter("ownerName"),
                         request.getParameter("storeInfo"));
                     
@@ -187,33 +194,6 @@ public class ComicServlet extends HttpServlet {
     }
     
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ComicServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ComicServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -264,7 +244,7 @@ public class ComicServlet extends HttpServlet {
 //        }
 //
 
-        ComicDAO dao = new ComicDAO();
+        ComicDAO dao = new ComicDAO(); // Data Access Object.
         
         String action = request.getParameter("action");
         
@@ -277,7 +257,7 @@ public class ComicServlet extends HttpServlet {
         
         if ("edit".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
-            Comic existingComic = dao.getComicById(id, userId);
+            Comic existingComic = dao.getComicById(id, userId); // Data Access Object to work on SQL Logic.
             request.setAttribute("comic", existingComic);
             request.getRequestDispatcher("editComic.jsp").forward(request, response);
             return;
@@ -289,6 +269,35 @@ public class ComicServlet extends HttpServlet {
         request.setAttribute("myComics", comicList);
         request.getRequestDispatcher("wantList.jsp").forward(request, response);
     }
+    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ComicServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ComicServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
 
     /**
      * Returns a short description of the servlet.

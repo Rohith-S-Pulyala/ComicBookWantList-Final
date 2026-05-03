@@ -41,7 +41,12 @@
                 <tr>
                     <th>Title</th>
                     <th>Issue</th>
+                    <th>Publisher</th>
+                    <th>Author</th>
+                    <th>Illustrator</th>
+                    <th>Variant?</th>
                     <th>Store</th>
+                    <th>Owner</th>
                     <th>Notes</th>
                     <th>Actions</th>
                 </tr>
@@ -50,12 +55,19 @@
                 <!-- Java Standard Tag Library embed to add comics to the list. -->
                 <c:forEach var="comic" items="${myComics}">
                     <tr>
-                        <td>${comic.title}</td>
-                        <td>${comic.issueNumber}</td>
-                        <td>${comic.storeName != null ? comic.storeName : "Generic Store"}</td>
-                        <td>${comic.storeInfo != null ? comic.storeInfo : "No additional details"}</td>
+                        <td><c:out value="${comic.title}" /></td>
+                        <td><c:out value="${comic.issueNumber}" /></td>
+                        <td><c:out value="${comic.publisher}" /></td>
+                        <td><c:out value="${comic.author}" /></td>
+                        <td><c:out value="${comic.illustrator}" /></td>
+                        <td>${comic.isVariant ? "Yes" : "No"}</td>
+                        <td><c:out value="${comic.storeName}"  default="N/A" /></td>
+                        <td><c:out value="${comic.ownerName}" default="N/A" /></td>
+                        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">
+                            <c:out value="${comic.storeInfo}"  default="No additional details"/>
+                        </td>
                         <td>
-                            <a href="ComicServlet?action=edit&id=${comic.id}">Edit</q>
+                            <a href="ComicServlet?action=edit&id=${comic.id}">Edit</a>
                             |
                             <a href="ComicServlet?action=delete&id=${comic.id}"
                                style="color: red;"

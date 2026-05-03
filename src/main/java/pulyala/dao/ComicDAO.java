@@ -11,14 +11,16 @@ import com.mycompany.final_project_cis175.DBConnection;
 import pulyala.business.Comic;
 
 /**
- *
+ * Data Access Object to handle SQL Logic
+ * 
  * @author rohit
  */
 public class ComicDAO {
     
     public List<Comic> getComicsByUserId(int userId) {
         List<Comic> comicList = new ArrayList<>();
-        String sql = "SELECT wl.id, wl.title, wl.issue_number, s.store_name, s.store_info " +
+        String sql = "SELECT wl.id, wl.title, wl.issue_number, wl.publisher, wl.author, " +
+                     "wl.illustrator, wl.is_variant_cover, s.store_name, s.owner_name, s.store_info " +
                       "FROM want_list wl " +
                       "LEFT JOIN stores s ON wl.id = s.want_list_id " +
                       "WHERE wl.user_id = ?";
@@ -32,7 +34,12 @@ public class ComicDAO {
                         rs.getInt("id"),
                         rs.getString("title"),
                         rs.getInt("issue_number"),
+                        rs.getString("publisher"),
+                        rs.getString("author"),
+                        rs.getString("illustrator"),
+                        rs.getBoolean("is_variant_cover"),
                         rs.getString("store_name"),
+                        rs.getString("owner_name"),
                         rs.getString("store_info")
                     ));
                 }
@@ -44,7 +51,8 @@ public class ComicDAO {
     }
     
     public Comic getComicById(int comicId, int userId) {
-        String sql = "SELECT wl.id, wl.title, wl.issue_number, s.store_name, s.store_info " +
+        String sql = "SELECT wl.id, wl.title, wl.issue_number, wl.publisher, wl.author, " +
+                     "wl.illustrator, wl.is_variant_cover, s.store_name, s.owner_name, s.store_info " +
                       "FROM want_list wl " +
                       "LEFT JOIN stores s ON wl.id = s.want_list_id " +
                       "WHERE wl.id = ? AND wl.user_id = ?";
@@ -54,9 +62,18 @@ public class ComicDAO {
             ps.setInt(2, userId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new Comic(rs.getInt("id"), rs.getString("title"), 
-                                     rs.getInt("issue_number"), rs.getString("store_name"), 
-                                     rs.getString("store_info"));
+                    return new Comic(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getInt("issue_number"),
+                        rs.getString("publisher"),
+                        rs.getString("author"),
+                        rs.getString("illustrator"),
+                        rs.getBoolean("is_variant_cover"),
+                        rs.getString("store_name"),
+                        rs.getString("owner_name"),
+                        rs.getString("store_info")
+                    );
                 }
             }
         } catch (SQLException excpt) { 
@@ -65,9 +82,15 @@ public class ComicDAO {
         return null;
     }
     
-    public boolean updateComic(int comicId, int userId, String title, int issue, String storeName, String storeInfo) {
-        String sqlWantList = "UPDATE want_list SET title = ?, issue_number = ? WHERE id = ? AND user_id = ?";
-        String sqlStore = "UPDATE stores SET store_name = ?, store_info = ? WHERE want_list_id = ?";
+    public boolean updateComic(int comicId, int userId, String title, int issue,
+                               String publisher, String author, String illustrator,
+                               boolean isVariant, String storeName, String ownerName, String storeInfo) {
+        String sqlWantList = "UPDATE want_list SET title = ?, issue_number = ?, publisher = ?, " + 
+                             "author = ?, illustrator = ?, is_variant_cover = ? " + 
+                             "WHERE id = ? AND user_id = ?";
+        
+        
+        String sqlStore = "UPDATE stores SET store_name = ?, owner_name = ?, store_info = ? WHERE want_list_id = ?";
         
         try (Connection conn = DBConnection.getConnection();) {
             conn.setAutoCommit(false);
@@ -76,13 +99,18 @@ public class ComicDAO {
                 
                 ps1.setString(1, title);
                 ps1.setInt(2, issue);
-                ps1.setInt(3, comicId);
-                ps1.setInt(4, userId);
+                ps1.setString(3, publisher);
+                ps1.setString(4, author);
+                ps1.setString(5, illustrator);
+                ps1.setBoolean(6, isVariant);
+                ps1.setInt(7, comicId);
+                ps1.setInt(8, userId);
                 ps1.executeUpdate();
                 
                 ps2.setString(1, storeName);
-                ps2.setString(2, storeInfo);
-                ps2.setInt(3, comicId);
+                ps2.setString(2, ownerName);
+                ps2.setString(3, storeInfo);
+                ps2.setInt(4, comicId);
                 ps2.executeUpdate();
                 
                 conn.commit();

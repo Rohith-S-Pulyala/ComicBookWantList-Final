@@ -1,0 +1,12 @@
+# Ignore the real context file with my password
+src/main/webapp/META-INF/context.xml
+
+# Ignore NetBeans private folders and build files
+nbproject/private/
+build/
+dist/
+nbbuild/
+nbdist/
+
+# Logs and temp files
+*.log

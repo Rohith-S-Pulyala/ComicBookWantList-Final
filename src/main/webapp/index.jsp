@@ -109,9 +109,9 @@
 
             <div class="form-group">
                 <label>Variant Cover:</label>
-                <select name="variantCover">
+                <select name="isVariant">
                     <option value="false">No</option>
-                    <option value="true">yes</option>
+                    <option value="true">Yes</option>
                 </select>
             </div>
 
